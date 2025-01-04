@@ -41,7 +41,6 @@ const Login = () => {
               </p>
             </div>
 
-            {/* Form */}
             <form className="w-full max-w-md">
               {/* Email */}
               <div className="mb-6">

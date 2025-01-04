@@ -6,7 +6,6 @@ import "./index.css";
 import Register from "./Routes/Register";
 import ResetPassword from "./Routes/ResetPassword";
 
-// Define routes using createBrowserRouter
 const router = createBrowserRouter([
   {
     path: "/login",
