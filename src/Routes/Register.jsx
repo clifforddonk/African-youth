@@ -152,7 +152,7 @@ const Register = () => {
               {/* Buttons */}
               <div className="text-center">
                 <button
-                  className="w-1/3 bg-[#0B054B] text-white py-2 rounded-full hover:bg-[#0B054B]/90 transition-colors font-medium"
+                  className="w-1/3 bg-[#0B054B] text-white py-1 rounded-full hover:bg-[#0B054B]/90 transition-colors font-medium"
                   type="button"
                 >
                   Sign Up
@@ -163,7 +163,7 @@ const Register = () => {
                 </p>
                 <Link to="/login">
                   <button
-                    className="w-1/3 bg-white border border-[#0B054B] text-[#0B054B] py-2 rounded-full hover:bg-[#0B054B] hover:text-white transition-colors font-medium mb-8 lg:mb-3"
+                    className="w-1/3 bg-white border border-[#0B054B] text-[#0B054B] py-1 rounded-full hover:bg-[#0B054B] hover:text-white transition-colors font-medium mb-8 lg:mb-3"
                     type="button"
                   >
                     Login
