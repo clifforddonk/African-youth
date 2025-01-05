@@ -87,7 +87,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="text-center">
                 <button
                   className="w-1/3 bg-[#0B054B] text-white py-1 rounded-full hover:bg-[#0B054B]/90 transition-colors font-medium"
