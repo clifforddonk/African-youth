@@ -14,7 +14,7 @@ const ResetPassword = () => {
           <img className="w-16 h-16" src="./image1.png" alt="Logo" />
         </div>
         <div>
-          <p className=" font-medium">English</p>
+          <p className="font-medium">English</p>
         </div>
       </div>
 
@@ -102,7 +102,6 @@ const ResetPassword = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
               <div className="text-center">
                 <button
                   className="w-1/3 bg-[#0B054B] text-white py-1 rounded-full hover:bg-[#0B054B]/90 transition-colors font-medium"
