@@ -5,6 +5,7 @@ import Login from "./Routes/Login";
 import "./index.css";
 import Register from "./Routes/Register";
 import ResetPassword from "./Routes/ResetPassword";
+import ForgotPassword from "./Routes/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <ResetPassword />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
 ]);
 

@@ -18,7 +18,7 @@ const Login = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex items-center justify-center min-h-[calc(100vh-80px)]">
+      <div className="flex items-center justify-center min-h-[calc(100vh-90px)]">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 w-full max-w-5xl px-4">
           {/* Image Section */}
           <div className="flex justify-center items-center">
