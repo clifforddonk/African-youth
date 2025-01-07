@@ -34,7 +34,7 @@ const ForgotPassword = () => {
               <h1 className="text-2xl lg:text-xl font-bold text-center mt-1">
                 Trouble Logging In?
               </h1>
-              <p className="mt-2 text-gray-600 text-center ">
+              <p className="mt-2 text-gray-400 text-center ">
                 Enter your email and we'll send you a link to get back to your
                 account.
               </p>
