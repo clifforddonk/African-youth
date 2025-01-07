@@ -53,7 +53,7 @@ const ForgotPassword = () => {
                 <input
                   type="email"
                   id="email"
-                  className="w-full  px-4 py-2 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
+                  className="w-full  px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
                   placeholder="example@gmail.com"
                 />
               </div>
