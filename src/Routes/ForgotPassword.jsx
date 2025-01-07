@@ -43,7 +43,7 @@ const ForgotPassword = () => {
             {/* Form */}
             <form className="w-full ">
               {/* Email */}
-              <div className="mb-7">
+              <div className="mb-6">
                 <label
                   htmlFor="email"
                   className="block text-gray-700 text-sm font-medium mb-2"
