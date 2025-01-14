@@ -1,18 +1,82 @@
+"use client";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
-
+import Link from "next/link";
+import { countries } from "@/app/data/countries";
+import { useRouter } from "next/navigation";
+import { AppLogo } from "@/app/components/common/AppLogo";
+import { Alert } from "@/app/components/common/Alert";
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertType, setAlertType] = useState("error");
+  const [alertKey, setAlertKey] = useState(0);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    fullname: "",
+    country: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    setIsLoading(true);
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    // Handle response if necessary
+    const res = await response.json();
+
+    setIsLoading(false);
+
+    if (response.ok) {
+      setAlertType("success");
+      setAlertMessage(res.message);
+      setFormData({
+        fullname: "",
+        country: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+      });
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      router.push("/auth/login");
+      return;
+    } else {
+      setAlertMessage(res.message);
+      setAlertType("error");
+    }
+
+    setAlertKey((prevKey) => prevKey + 1);
+  }
   return (
     <div className="bg-[#F8F9FA] min-h-screen">
+      <Alert message={alertMessage} type={alertType} uniqueKey={alertKey} />
+
       {/* Top Section */}
       <div className="flex justify-between items-center px-4 py-3">
-        <div>
-          <img className="w-16 h-16" src="./image1.png" alt="Logo" />
-        </div>
+        <AppLogo />
         <div>
           <p className="font-medium">English</p>
         </div>
@@ -25,7 +89,7 @@ const Register = () => {
           <div className="flex justify-center items-center">
             <img
               className="w-48 h-48 lg:w-72 lg:h-72"
-              src="./image2.png"
+              src="/images/auth-image.png"
               alt="Festival"
             />
           </div>
@@ -33,7 +97,7 @@ const Register = () => {
           {/* Content Section */}
           <div className="flex flex-col justify-center items-center">
             <div className="text-center mb-8">
-              <h1 className="text-2xl lg:text-3xl font-bold">
+              <h1 className="text-2xl text-[color:#233040] lg:text-3xl font-bold">
                 African Youth Festival
               </h1>
               <p className="mt-3 text-gray-600">
@@ -42,7 +106,7 @@ const Register = () => {
             </div>
 
             {/* Form */}
-            <form className="w-full max-w-md">
+            <form onSubmit={onSubmit} className="w-full max-w-md">
               {/* Full Name */}
               <div className="mb-6">
                 <label
@@ -53,9 +117,13 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
+                  name="fullname"
+                  value={formData.fullname}
+                  onChange={handleChange}
                   id="full-name"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
                   placeholder="Enter your full name"
+                  required
                 />
               </div>
 
@@ -69,9 +137,13 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   id="email"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
                   placeholder="example@gmail.com"
+                  required
                 />
               </div>
 
@@ -83,12 +155,23 @@ const Register = () => {
                 >
                   Country of Residence
                 </label>
-                <input
-                  type="text"
+                <select
                   id="country"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
-                  placeholder="Enter your country"
-                />
+                  required
+                >
+                  <option value="" disabled>
+                    Select your country
+                  </option>
+                  {Object.entries(countries).map(([code, name]) => (
+                    <option key={code} value={code}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Password */}
@@ -102,9 +185,13 @@ const Register = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
+                    name="password"
                     id="password"
+                    value={formData.password}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
                     placeholder="Enter password"
+                    required
                   />
                   <button
                     type="button"
@@ -123,7 +210,7 @@ const Register = () => {
               {/* Confirm Password */}
               <div className="mb-8">
                 <label
-                  htmlFor="confirm-password"
+                  htmlFor="confirm_password"
                   className="block text-gray-700 text-sm font-medium mb-2"
                 >
                   Confirm Password
@@ -131,9 +218,13 @@ const Register = () => {
                 <div className="relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    id="confirm-password"
+                    id="confirm_password"
+                    value={formData.confirm_password}
+                    onChange={handleChange}
+                    name="confirm_password"
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#0B054B] focus:ring-1 focus:ring-[#0B054B] outline-none transition-colors text-gray-700"
                     placeholder="Re-enter password"
+                    required
                   />
                   <button
                     type="button"
@@ -149,18 +240,19 @@ const Register = () => {
                 </div>
               </div>
 
+              {/* Buttons */}
               <div className="text-center">
                 <button
                   className="w-1/3 bg-[#0B054B] text-white py-1 rounded-full hover:bg-[#0B054B]/90 transition-colors font-medium"
-                  type="button"
+                  type="submit"
                 >
-                  Sign Up
+                  {isLoading ? "Processing" : "Sign Up"}
                 </button>
                 <hr className="my-6 border-gray-300" />
                 <p className="text-gray-700 mt-3 mb-3">
                   Already have an account?
                 </p>
-                <Link to="/login">
+                <Link href="/auth/login">
                   <button
                     className="w-1/3 bg-white border border-[#0B054B] text-[#0B054B] py-1 rounded-full hover:bg-[#0B054B] hover:text-white transition-colors font-medium mb-8 lg:mb-3"
                     type="button"

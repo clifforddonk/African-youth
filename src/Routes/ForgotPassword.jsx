@@ -6,7 +6,7 @@ const ForgotPassword = () => {
       {/* Top Section */}
       <div className="flex justify-between items-center px-4 py-3">
         <div>
-          <img className="w-16 h-16" src="./image1.png" alt="Logo" />
+          <img className="w-17 h-16" src="./image1.png" alt="Logo" />
         </div>
         <div>
           <p className="font-medium">English</p>
